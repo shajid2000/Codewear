@@ -1,12 +1,13 @@
 import mongoose from "mongoose"
 import Product from '../../models/Product';
+import connectDb from '../../middleware/mongoose';
 
-const handler = async (req, res) => {
-    if (!mongoose.connections[0].readyState) {
-        console.log('connecting db');
-        await mongoose.connect(`${process.env.MONGO_URI}`)
-        console.log('connected db');  
-     }
+const Handler = async (req, res) => {
+    // if (!mongoose.connections[0].readyState) {
+    //     console.log('connecting db');
+    //     await mongoose.connect(`${process.env.MONGO_URI}`)
+    //     console.log('connected db');  
+    //  }
 
     let products = await Product.find({category: req.query.category});
 
@@ -36,8 +37,8 @@ const handler = async (req, res) => {
     }
     // console.log(tshirts)
 
-    res.status(200).json(tshirts);
+    res.status(200).json(tshirts); 
 }
 
-export default handler;
-// export default connectDb(handler);
+// export default handler;
+export default connectDb(Handler);
