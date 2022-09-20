@@ -10,7 +10,7 @@ const connectDb = handler => async (req, res) => {
 
 
 
-const uri = process.env.MONGO_URI
+const uri = process.env.MONGODB_URI
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 }).then(() => {
     // console.log('connection is successful');
     return handler(req, res);
